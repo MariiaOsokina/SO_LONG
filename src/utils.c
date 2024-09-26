@@ -10,45 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
-void	check_input(int argc, char **argv)
+void	check_args(int argc, char **argv, t_data *data)
 {
 	if (argc > 2)
-		error_msg("Error\nToo many arguments\nAdd just a map in .ber file");
+		error_msg("Too many arguments\nAdd just a map in .ber file", data);
 	if (argc < 2)
-		error_msg("Error\nAdd a path to the map in .ber file");
+		error_msg("Add a path to the map in .ber file", data);
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
-		error_msg("Error\nThe map has to be in .ber file\n");
+		error_msg("The map has to be in .ber file\n", data);
 }
 
-void	is_map_valide(char *map_path)
+void	is_map_valide(char *map_path, t_data *data)
 {
 	int		fd_ber;
 	char	buffer[1];
-	t_map	*map;
-	// char	*err_msg;
 
-/*Problems with file oppening*/
 	fd_ber = open(map_path, O_RDONLY);
 	if (fd_ber == -1)
 		perr_msg("Error\nProblems with openning map in .ber\n");
-	ft_printf("FD is %d\n", fd_ber);
-	if (read(fd_ber, buffer, 1) == 0)
-		error_map("Error\nThe .ber file is empty\n", fd_ber);
-	map_parse(fd_ber, &map);
-	// if (is_map_rectangle(fd_ber) == 0)
-	// 	error_map("Error\nThe map should be rectanle\n", fd_ber);
-	// if (is_wall_exit(fd_ber) == 0)
-	// 	error_map("Error\nThe map should be closed/surrounded by walls.\n");
+	map_parse(fd_ber, data);
+	check_rectangle(data);
+	check_walls(data);
+	data->map.player = 0;
+	data->map.g_exit = 0;
+	data->map.coins = 0;
+	check_map_content(data);
 }
 
-void	map_parse(int fd_ber, t_map **map)
+void	map_parse(int fd_ber, t_data *data)
 {
-	char	*temp_line;
 	char	*temp_map;
+	char	*temp_line;
 
-	(*map)->row = 0;
+	data->map.row = 0;
 	temp_map = ft_strdup("");
 	while (1)
 	{
@@ -57,11 +53,15 @@ void	map_parse(int fd_ber, t_map **map)
 			break ;
 		temp_map = ft_strappend(&temp_map, temp_line);
 		free (temp_line);
-		(*map)->row ++;
+		data->map.row ++;
 	}
 	close (fd_ber);
-	(*map)->map_arr = ft_split(temp_map, '\n');
+	check_empty_line(temp_map, data);
+	data->map.map_arr = ft_split(temp_map, '\n');
+	data->map_alloc = true;
 	free(temp_map);
+	if (data->map.row == 0)
+		error_msg("Empty map\n", data);
 }
 
 char	*ft_strappend(char **s1, const char *s2)
@@ -79,95 +79,113 @@ char	*ft_strappend(char **s1, const char *s2)
 	return (str);
 }
 
-// 	// is there 1 player
-// 	// is there 1 exit
-// 	// is there one or mo collectibles
-
-// int	is_map_rectangle(int fd)
-// {
-// 	char	*line;
-// 	size_t	line_size;
-
-// 	line = get_next_line(fd);
-// 	line_size = ft_strlen(line);
-// 	while (1)
-// 	{
-// 		if (line == NULL)
-// 			break ;
-// 		line = get_next_line(fd);
-// 		if (line_size != ft_strlen(line))
-// 		{
-// 			free(line);
-// 			return (0);
-// 		}
-// 		free(line);
-// 	}
-// 	return (1);
-// }
-
-int	is_wall_exist(int fd)
+void	check_empty_line(char *temp_map, t_data *data)
 {
-	char	*line;
-	size_t	line_size;
+	int i;
 
-	line = get_next_line(fd);
-	line_size = ft_strlen(line);
-	while (1)
+	i = 1;
+	if (temp_map[0] == '\n')
 	{
-		if (line == NULL)
-			break ;
-		line = get_next_line(fd);
-		if (line_size != ft_strlen(line))
-		{
-			free(line);
-			return (0);
-		}
-		free(line);
+		free(temp_map);
+		error_msg("Empty first line in the map\n", data);
 	}
-	return (1);
+	while(temp_map[i])
+	{
+		if ((temp_map[i-1] == '\n') && (temp_map[i] == '\n'))
+		{
+			free(temp_map);
+			error_msg("Empty line in the map\n", data);
+		}
+		i ++;
+	}
+	if (temp_map[i-1]== '\n')
+	{
+		free(temp_map);
+		error_msg("Empty last line in the map\n", data);
+	}
 }
 
+void	check_rectangle(t_data *data)
+{
+	int i;
+	int	fst_line_size;
 
-// void	set_win_size(t_data *data, char *map_path)
-// {
-	// int	fd_ber;
-	// (void)*data;
+	fst_line_size = ft_strlen(data->map.map_arr[0]);
+	i = 0;
+	while (i < data->map.row)
+	{
+		if ((ft_strlen(data->map.map_arr[i]) == 1) && (data->map.map_arr[i][0] == '\n'))
+			error_msg("The map includes the empty line.\nThe map should be rectanle\n", data);
+		if (ft_strlen(data->map.map_arr[i]) != fst_line_size)
+			error_msg("The map should be rectangle\n", data);
+		i ++;
+	}
+}
 
-	// fd_ber = open(map_path, O_RDONLY);
-	// if (fd_ber == -1)
-	// 	perr_msg("Error\nProblems with map in .ber\n");
-	// ft_printf("FD is %d\n", fd_ber);
+int	check_walls(t_data *data)
+{
+	int i;
+	int	lst_c_ind;
+	int lst_r_ind;
 
-	
-	// data->size_x = 
-	// data->size_y = 
-// }
+	i = 0;
+	lst_c_ind = ft_strlen(data->map.map_arr[0]) - 1;
+	lst_r_ind = data->map.row - 1;
+	while (i <= lst_c_ind)
+	{
+		if (data->map.map_arr[0][i] != '1' || data->map.map_arr[lst_r_ind][i] != '1')
+			error_msg("The map should be surounded by the wall\n", data);
+		i ++;
+	}
+	i = 1;
+	while(i < lst_r_ind)
+	{
+		if (data->map.map_arr[i][0] != '1' || data->map.map_arr[i][lst_c_ind] != '1')
+			error_msg("The map should be surrounded by the wall\n", data);
+		i ++;
+	}
+}
 
-// int	ft_line_lengh(int fd)
-// {
-	
-// }
+int	check_map_content(t_data *data)
+{
+	int i;
+	int j;
 
-// int	ft_count_lines(int fd)
-// {
-	
-// }
+	i = 0;
+	while(data->map.map_arr && data->map.map_arr[++i])
+	{
+		j = -1;
+		while (data->map.map_arr[i] && data->map.map_arr[i][++j])
+		{
+			if (data->map.map_arr[i][j] == 'P')
+				data->map.player += 1;
+			else if (data->map.map_arr[i][j] == 'E')
+				data->map.g_exit += 1;
+			else if (data->map.map_arr[i][j] == 'C')
+				data->map.coins += 1;
+			else if (data->map.map_arr[i][j] != '0' && data->map.map_arr[i][j] != '1')
+				error_msg("Only '0','1','C','P','E' are valid\n", data);
+		}
+	}
+	if (data->map.player != 1 || data->map.g_exit != 1)
+		error_msg("Only 1 player and 1 exit.  Please check\n", data);
+	if (data->map.coins < 1)
+		error_msg("No collectables(coins), Please check\n", data);
+}
 
+int	ft_count_c(char *s, char c)
+{
+	int	i;
+	int	x;
 
-/* the funstion initialize:
-- map to data
-- xpm files to imgs;
-*/ 
-
-// void    ft_initilize(t_data *data, t_map *map)
-// {
-// 	data->map = map;
-// }
-
-
-
-
-// void    ft_initilize(t_data *data, t_map *map)
-// {
-// 	data->map = map;
-// }
+	i = 0;
+	x = 0;
+	if (!s)
+		return (-1);
+	while (s && s[i])
+	{
+		if (s[i++] == c)
+			x++;
+	}
+	return (x);
+}

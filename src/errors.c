@@ -10,12 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
-int	error_msg(char *msg)
+int	error_msg(char *msg, t_data *data)
 {
-	ft_printf(msg);
+	if (data->map_alloc == true)
+		ft_free_map(data);
+	free(data);
+	ft_printf("Error\n%s", msg);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_free_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->map.row)
+	{
+		free(data->map.map_arr[i]);
+		i++;
+	}
+	free(data->map.map_arr);
 }
 
 int	perr_msg(char *msg)
