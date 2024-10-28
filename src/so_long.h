@@ -6,7 +6,7 @@
 /*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:31:40 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 00:44:03 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/10/28 00:08:37 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "../libft/libft.h"
 
 
-# define GAME_NAME 		"SO_LONG PROJECT: pick up all flowers abd go home!"
+# define GAME_NAME 		"SO_LONG PROJECT: pick up all flowers and go home!"
 # define IMG_W 			32
 # define IMG_H 			32
 # define EX_XPM 		"./textures/house_locked.xpm"
