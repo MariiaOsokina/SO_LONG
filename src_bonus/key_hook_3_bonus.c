@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_3_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:15:48 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:16:29 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:07:00 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	is_emeny_close(t_data *data)
 {
-	int x;
+	int	x;
 	int	y;
 
 	x = data->map.wf.x;
@@ -31,15 +31,20 @@ void	is_emeny_close(t_data *data)
 		return ;
 }
 
-void put_counter(t_data *data, int colour)
+void	put_counter(t_data *data, int colour)
 {
-		char	*score;
-	
-		score = ft_itoa(data->mv_count);
-		mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img, ((data->map.clmns / 2 - 1) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
-		mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img, ((data->map.clmns / 2) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
-		mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img, ((data->map.clmns / 2 + 1) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
-		mlx_string_put(data->mlx, data->win, (data->map.clmns / 2) * IMG_W - 10, (data->map.rows) * IMG_H - 10, colour, "SCORE: ");
-		mlx_string_put(data->mlx, data->win, (data->map.clmns / 2) * (IMG_W) + 40, (data->map.rows) * IMG_H -10, colour, score);
-		free(score);
+	char	*score;
+
+	score = ft_itoa(data->mv_count);
+	mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img,
+		((data->map.clmns / 2 - 1) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
+	mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img,
+		((data->map.clmns / 2) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
+	mlx_put_image_to_window(data->mlx, data->win, data->imgs.wall_img,
+		((data->map.clmns / 2 + 1) * IMG_W), (data->map.rows * IMG_H) - IMG_H);
+	mlx_string_put(data->mlx, data->win, (data->map.clmns / 2) * IMG_W - 10,
+		(data->map.rows) * IMG_H - 10, colour, "SCORE: ");
+	mlx_string_put(data->mlx, data->win, (data->map.clmns / 2) * (IMG_W) + 40,
+		(data->map.rows) * IMG_H -10, colour, score);
+	free(score);
 }

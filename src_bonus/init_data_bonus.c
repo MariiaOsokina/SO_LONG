@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:07:47 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:03:54 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:59:55 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	init_sprites(t_data *data)
 	data->imgs.pl_rght_img = init_new_img(data, PL_RGHT_XPM);
 	data->imgs.bckgr_img = init_new_img(data, BCKGR_XPM);
 	data->imgs.wall_img = init_new_img(data, WALL_XPM);
-	/*bonus part*/
 	data->imgs.wf_up_img = init_new_img(data, WF_UP_XPM);
 	data->imgs.wf_down_img = init_new_img(data, WF_DOWN_XPM);
 	data->imgs.wf_lft_img = init_new_img(data, WF_LFT_XPM);
@@ -50,9 +49,9 @@ void	init_sprites(t_data *data)
 
 void	*init_new_img(t_data *data, char *xpm_path)
 {
-	int w;
-	int h;
-	void *img_ptr;
+	int		w;
+	int		h;
+	void	*img_ptr;
 
 	w = IMG_W;
 	h = IMG_H;

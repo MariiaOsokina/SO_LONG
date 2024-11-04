@@ -13,7 +13,7 @@ HEADER_FILE = src/so_long.h
 SRC_PATH_BONUS = src_bonus/
 OBJ_PATH_BONUS = obj_bonus/
 SRC_BONUS 	= check_path_bonus.c check_valid_map_2_bonus.c check_valid_map_bounus.c \
-            end_of_game_bonus.c init_data_bonus.c key_hook_2_bonus.c \
+            end_of_game_bonus.c end_of_game_2_bonus.c init_data_bonus.c key_hook_2_bonus.c \
             key_hook_3_bonus.c key_hook_bonus.c main_bonus.c \
             place_sprites_bonus.c utils_bonus.c
 SRCS_BONUS	= $(addprefix $(SRC_PATH_BONUS), $(SRC_BONUS))
@@ -37,16 +37,16 @@ MLX_FLAGS = -L ./minilibx -lmlx -lmlx_Linux -L/usr/lib/X11 -lXext -lX11
 
 all: $(MLX_LIB) $(LIBFT_LIB) $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(MLX_FLAGS) $(PRINTF_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER_FILE)
 	mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
-bonus:	$(NAME_BONUS)
+$(NAME_BONUS):	$(MLX_LIB) $(LIBFT_LIB) $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJS_BONUS)
+bonus: $(OBJS_BONUS)
 	$(CC) $(OBJS_BONUS) $(CFLAGS) $(MLX_FLAGS) $(PRINTF_FLAGS) $(LIBFT_FLAGS) -o $(NAME_BONUS)
 
 $(OBJ_PATH_BONUS)%.o: $(SRC_PATH_BONUS)%.c $(HEADER_FILE_BONUS)

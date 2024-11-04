@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_of_game_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:05:32 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:02:57 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:46:45 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,7 @@ int	error_msg(char *msg, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-int	victory(t_data *data)
-{
-	ft_printf("-----------------------------------------------\n");
-	ft_printf("|                H O O R A Y!!!!            |\n");
-	ft_printf("|    You found all flowers and go home.     |\n");
-	ft_printf("|        YOU WON! GOOD JOB!                 |\n");
-	ft_printf("|      Totally you did %d steps!            |\n", data->mv_count);
-	ft_printf("-----------------------------------------------\n");
-	free_all_alloc_memory(data);
-	exit(0);
-}
-
-int	game_over(t_data *data)
-{
-	ft_printf("-----------------------------------------------\n");
-	ft_printf("|                O O O P S ...!!!!            |\n");
-	ft_printf("|       You met the wolf and he ate you.      |\n");
-	ft_printf("|                YOU LOSE! SORRY!             |\n");
-	ft_printf("|      Totally you did %d steps!              |\n", data->mv_count);
-	ft_printf("-----------------------------------------------\n");
-	free_all_alloc_memory(data);
-	exit(0);
-}
-
-void free_all_alloc_memory(t_data *data)
+void	free_all_alloc_memory(t_data *data)
 {
 	destroy_images(data);
 	if (data->win)
@@ -92,15 +68,7 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->imgs.bckgr_img);
 	if (data->imgs.wall_img)
 		mlx_destroy_image(data->mlx, data->imgs.wall_img);
-	/*bonus part*/
-	if (data->imgs.wf_down_img)
-		mlx_destroy_image(data->mlx, data->imgs.wf_down_img);
-	if (data->imgs.wf_lft_img)
-		mlx_destroy_image(data->mlx, data->imgs.wf_lft_img);
-	if (data->imgs.wf_rght_img)
-		mlx_destroy_image(data->mlx, data->imgs.wf_rght_img);
-	if (data->imgs.wf_up_img)
-		mlx_destroy_image(data->mlx, data->imgs.wf_up_img);
+	destroy_images_wf(data);
 }
 
 int	game_destroy(t_data *data)

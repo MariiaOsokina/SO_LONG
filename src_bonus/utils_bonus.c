@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:30:05 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:19:39 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:29:14 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,3 @@ void	free_str_arr(char **str_arr)
 	}
 	free(str_arr);
 }
-
-
