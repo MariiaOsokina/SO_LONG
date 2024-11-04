@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 11:38:35 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:01:27 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:29:04 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_empty_file(char *temp_map, t_data *data)
 
 void	check_empty_line(char *temp_map, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (temp_map[0] == '\n')
@@ -74,16 +74,16 @@ void	check_empty_line(char *temp_map, t_data *data)
 		free(temp_map);
 		error_msg("Empty first line in the map\n", data);
 	}
-	while(temp_map[i])
+	while (temp_map[i])
 	{
-		if ((temp_map[i-1] == '\n') && (temp_map[i] == '\n'))
+		if ((temp_map[i - 1] == '\n') && (temp_map[i] == '\n'))
 		{
 			free(temp_map);
 			error_msg("Empty line in the map\n", data);
 		}
 		i ++;
 	}
-	if (temp_map[i-1]== '\n')
+	if (temp_map[i - 1] == '\n')
 	{
 		free(temp_map);
 		error_msg("Empty last line in the map\n", data);

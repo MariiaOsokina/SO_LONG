@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_of_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:05:32 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 00:33:45 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:15:04 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,7 @@ int	error_msg(char *msg, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-int	victory(t_data *data)
-{
-	ft_printf("-----------------------------------------------\n");
-	ft_printf("|                H O O R A Y!!!!            |\n");
-	ft_printf("|    You found all flowers and go home.     |\n");
-	ft_printf("|        YOU WON! GOOD JOB!                 |\n");
-	ft_printf("|      Totally you did %d steps!            |\n", data->mv_count);
-	ft_printf("-----------------------------------------------\n");
-	free_all_alloc_memory(data);
-	exit(0);
-}
-
-void free_all_alloc_memory(t_data *data)
+void	free_all_alloc_memory(t_data *data)
 {
 	destroy_images(data);
 	if (data->win)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:07:47 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:03:54 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:15:50 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	init_sprites(t_data *data)
 
 void	*init_new_img(t_data *data, char *xpm_path)
 {
-	int w;
-	int h;
-	void *img_ptr;
+	int		w;
+	int		h;
+	void	*img_ptr;
 
 	w = IMG_W;
 	h = IMG_H;

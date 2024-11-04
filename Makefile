@@ -3,7 +3,7 @@ NAME_BONUS	= so_long_bonus
 
 SRC_PATH = src/
 OBJ_PATH = obj/
-SRC = main.c utils.c end_of_game.c check_valid_map.c check_valid_map_2.c \
+SRC = main.c utils.c end_of_game.c end_of_game_2.c check_valid_map.c check_valid_map_2.c \
       check_path.c init_data.c place_sprites.c key_hook.c
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ 	= $(SRC:.c=.o)

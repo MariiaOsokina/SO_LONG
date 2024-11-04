@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:16:58 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 00:55:58 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:03:11 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int argc, char *argv[])
 	if (!data->mlx)
 		error_msg("Mlx ptr. Problems with malloc", data);
 	init_sprites(data);
-	data->win = mlx_new_window(data->mlx, (data->map.clmns * IMG_W), (data->map.rows * IMG_H), GAME_NAME);
+	data->win = mlx_new_window(data->mlx, (data->map.clmns * IMG_W),
+			(data->map.rows * IMG_H), GAME_NAME);
 	if (!data->win)
 		error_msg("Window. Problems with malloc.", data);
 	put_background(data);
@@ -43,7 +44,7 @@ void	check_args(int argc, char **argv)
 		ft_printf("Error\n%s", "Too many arguments\n \
 		Add just a map in .ber file\n");
 		exit(EXIT_FAILURE);
-	}		
+	}
 	if (argc < 2)
 	{
 		ft_printf("Error\n%s", "Add a path to the map in .ber file\n");

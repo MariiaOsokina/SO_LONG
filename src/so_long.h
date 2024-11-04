@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:31:40 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/28 00:08:37 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:09:50 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "../libft/libft.h"
-
 
 # define GAME_NAME 		"SO_LONG PROJECT: pick up all flowers and go home!"
 # define IMG_W 			32
@@ -51,13 +50,13 @@
 # define KEY_S				115
 # define KEY_D				100
 
-typedef enum
+typedef enum e_bool
 {
 	false,
 	true
-} t_bool;
+}		t_bool;
 
-typedef struct  s_elem
+typedef struct s_elem
 {
 	int	x;
 	int	y;
@@ -71,10 +70,10 @@ typedef struct s_map
 	int		clmns;
 	t_elem	pl;
 	t_elem	flws;
-	t_elem 	ex;
+	t_elem	ex;
 }				t_map;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*ex_img;
 	void	*open_img;
@@ -97,8 +96,6 @@ typedef struct s_data
 	int		mv_count;
 }				t_data;
 
-
-
 void	check_args(int argc, char **argv);
 void	init_data(t_data *data);
 
@@ -114,23 +111,23 @@ void	check_map_symb(t_data *data, t_map *map, int j, int i);
 void	count_map_content(t_data *data, t_map *map);
 
 /*check path to strites*/
-void 	check_path(t_map map, t_data *data);
+void	check_path(t_map map, t_data *data);
 char	**dup_map(t_map map);
-void 	flood_fill (char **temp_map, t_map map, int x, int y);
-void 	check_path_help(char **temp_map, t_data *data);
+void	flood_fill(char **temp_map, t_map map, int x, int y);
+void	check_path_help(char **temp_map, t_data *data);
 
 /*sprites*/
 void	init_sprites(t_data *data);
 void	*init_new_img(t_data *data, char *xpm_path);
-void    put_background(t_data *data);
+void	put_background(t_data *data);
 void	put_sprites(t_data *data);
 
 /*movement functions*/
-void movement(t_data *data, char pos, int dir);
-int	key_hook(int keycode, t_data *data);
-void turn_player(t_data *data, char pos, int dir);
-void *init_new_pos(t_data *data, char pos, int dir, int *new_x, int *new_y);
-void move_player(t_data *data, int new_x, int new_y, void *img_ptr);
+void	movement(t_data *data, char pos);
+int		key_hook(int keycode, t_data *data);
+void	turn_player(t_data *data, char pos);
+void	*init_new_pos(t_data *data, char pos, int *new_x, int *new_y);
+void	move_player(t_data *data, int new_x, int new_y, void *img_ptr);
 
 /*end of game functions*/
 int		error_msg(char *msg, t_data *data);

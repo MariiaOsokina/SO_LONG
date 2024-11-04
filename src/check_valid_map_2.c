@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid_map_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosokina <mosokina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosokina <mosokina@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 11:38:35 by mosokina          #+#    #+#             */
-/*   Updated: 2024/10/26 01:00:19 by mosokina         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:31:27 by mosokina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_rectangle(t_data *data, t_map *map)
 {
-	int i;
+	int		i;
 	size_t	fst_line_size;
 
 	fst_line_size = ft_strlen(map->map_arr[0]);
@@ -33,9 +33,9 @@ void	check_rectangle(t_data *data, t_map *map)
 
 void	check_walls(t_data *data, t_map *map)
 {
-	int i;
+	int	i;
 	int	lst_c_ind;
-	int lst_r_ind;
+	int	lst_r_ind;
 
 	i = 0;
 	lst_c_ind = ft_strlen(map->map_arr[0]) - 1;
@@ -47,7 +47,7 @@ void	check_walls(t_data *data, t_map *map)
 		i ++;
 	}
 	i = 1;
-	while(i < lst_r_ind)
+	while (i < lst_r_ind)
 	{
 		if (map->map_arr[i][0] != '1' || map->map_arr[i][lst_c_ind] != '1')
 			error_msg("The map should be surrounded by the wall\n", data);
@@ -59,19 +59,19 @@ void	check_map_content(t_data *data, t_map *map)
 {
 	count_map_content(data, map);
 	if (map->pl.nb != 1 || map->ex.nb != 1)
-		error_msg("Should be only 1 player and 1 exit. Please check map\n",\
-		data);
+		error_msg("Should be only 1 player and 1 exit. Please check map\n",
+			data);
 	if (map->flws.nb < 1)
 		error_msg("No collectables(coins), Please check\n", data);
 }
 
 void	count_map_content(t_data *data, t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while(map->map_arr && map->map_arr[++i])
+	while (map->map_arr && map->map_arr[++i])
 	{
 		j = -1;
 		while (map->map_arr[i] && map->map_arr[i][++j])
